@@ -1,21 +1,27 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-interface FormPorps {
+interface FormProps {
   name: string;
   email: string;
 }
 
 const useForm = () => {
-  const [formValues, setFormValues] = useState<FormPorps>({
+  const [formValues, setFormValues] = useState<FormProps>({
     name: "",
-    email: ""
+    email: "",
+  });
+  const [formErrors, setFormErrors] = useState<FormProps>({
+    name: "",
+    email: "",
   });
 
   const form = {
     handleSubmit: (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log("submit", formValues);
-    }
+      validations.applyValidations();
+      if (validations.isInvalid()) return;
+      console.log("Submitted");
+    },
   };
 
   const inputs = {
@@ -24,13 +30,40 @@ const useForm = () => {
     },
     handleChangeEmail: (event: ChangeEvent<HTMLInputElement>) => {
       setFormValues((oldState) => ({ ...oldState, email: event.target.value }));
-    }
+    },
+  };
+
+  const validations = {
+    isInvalid: () => {
+      return formErrors.name.length || formErrors.name.length;
+    },
+    applyValidations: () => {
+      validations.isInvalidName();
+      validations.isInvalidEmail();
+    },
+    isInvalidName: () => {
+      if (!formValues.name) {
+        setFormErrors((oldState) => ({
+          ...oldState,
+          name: "Name is required",
+        }));
+      }
+    },
+    isInvalidEmail: () => {
+      if (!formValues.email) {
+        setFormErrors((oldState) => ({
+          ...oldState,
+          email: "Email is required",
+        }));
+      }
+    },
   };
 
   return {
     form,
     inputs,
-    formValues
+    formValues,
+    formErrors,
   };
 };
 
