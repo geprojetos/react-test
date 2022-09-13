@@ -19,8 +19,7 @@ const useForm = () => {
     handleSubmit: (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       validations.applyValidations();
-      if (validations.isInvalid()) return;
-      console.log("Submitted");
+      validations.isValid();
     },
   };
 
@@ -34,12 +33,16 @@ const useForm = () => {
   };
 
   const validations = {
-    isInvalid: () => {
-      return formErrors.name.length || formErrors.name.length;
+    isValid: () => {
+      if (formValues.name.length > 0 && formValues.email.length > 0) {
+        console.log("Submitted");
+      }
     },
     applyValidations: () => {
       validations.isInvalidName();
       validations.isInvalidEmail();
+      validations.isValidName();
+      validations.isValidEmail();
     },
     isInvalidName: () => {
       if (!formValues.name) {
@@ -49,11 +52,27 @@ const useForm = () => {
         }));
       }
     },
+    isValidName: () => {
+      if (formValues.name) {
+        setFormErrors((oldState) => ({
+          ...oldState,
+          name: "",
+        }));
+      }
+    },
     isInvalidEmail: () => {
       if (!formValues.email) {
         setFormErrors((oldState) => ({
           ...oldState,
           email: "Email is required",
+        }));
+      }
+    },
+    isValidEmail: () => {
+      if (formValues.email) {
+        setFormErrors((oldState) => ({
+          ...oldState,
+          email: "",
         }));
       }
     },
