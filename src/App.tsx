@@ -1,5 +1,5 @@
 import "./styles.css";
-import Counter from "./views/counter/";
+import { Buttons } from "./components/buttons/";
 import Form from "./views/form/";
 import GitHub from "./views/gitHub/";
 
@@ -12,7 +12,7 @@ export default function App() {
       </h1>
       <section className="global-centered">
         <div className="global-box">
-          <Counter />
+          <Buttons />
         </div>
       </section>
 
