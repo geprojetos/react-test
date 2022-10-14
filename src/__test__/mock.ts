@@ -12,4 +12,26 @@ const mockSubmit: any = {
   preventDefault: () => null,
 };
 
-export { mockEventName, mockEventEmail, mockSubmit };
+const mockApiGitHub = (saveValue: any) => {
+  saveValue({ login: "fake user name" });
+};
+
+const mockSubmitDefaultUserName: any = {
+  target: {
+    value: "",
+  },
+};
+const mockSubmitUserName: any = {
+  target: {
+    value: "test",
+  },
+};
+
+export {
+  mockEventName,
+  mockEventEmail,
+  mockSubmit,
+  mockApiGitHub,
+  mockSubmitDefaultUserName,
+  mockSubmitUserName,
+};

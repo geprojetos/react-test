@@ -1,7 +1,7 @@
 import "./styles.css";
 import { Buttons } from "./components/buttons/";
 import { Form } from "./components/form";
-import GitHub from "./views/gitHub/";
+import { GitHub } from "./components/gitHub/";
 
 export default function App() {
   return (
