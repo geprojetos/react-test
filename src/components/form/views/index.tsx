@@ -1,7 +1,8 @@
-import { useForm } from "../hooks";
+import { useForm, useValidations } from "../hooks";
 
 export const Form = () => {
-  const { form, inputs, formValues, formErrors } = useForm();
+  const { form, inputs, formValues } = useForm();
+  const { formErrors } = useValidations({ formValues });
 
   return (
     <section className="global-centered global-direction-column">
