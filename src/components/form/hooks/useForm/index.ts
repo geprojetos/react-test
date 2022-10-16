@@ -12,18 +12,18 @@ const useForm = () => {
     email: "",
   });
 
-  const { validations } = useValidations({ formValues });
+  const { validations, formErrors } = useValidations({ formValues });
 
   const form = {
     handleSubmit: (event: FormEvent<HTMLFormElement>) => {
-      form.utils.isSubmitted(event);
+      event.preventDefault();
+      validations.applyValidations();
+      form.utils.isSubmitted();
     },
     utils: {
-      isSubmitted: async (event: FormEvent<HTMLFormElement>) => {
-        await validations.applyValidations();
+      isSubmitted: () => {
         if (validations.isValid()) {
-          event.preventDefault();
-          console.log("Submitted");
+          console.log("submitted");
         }
       },
     },
@@ -42,6 +42,7 @@ const useForm = () => {
     form,
     inputs,
     formValues,
+    formErrors,
   };
 };
 

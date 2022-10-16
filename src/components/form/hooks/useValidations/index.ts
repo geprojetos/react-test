@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProps } from "../useForm";
 
 interface useValidationsProps {
@@ -10,6 +10,10 @@ const useValidations = ({ formValues }: useValidationsProps) => {
     name: "",
     email: "",
   });
+
+  useEffect(() => {
+    validations.isValid();
+  }, [formErrors]);
 
   const validations = {
     isValid: () => {
