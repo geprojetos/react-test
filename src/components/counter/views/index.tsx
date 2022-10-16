@@ -1,7 +1,7 @@
-import { useButtons } from "../hooks";
+import { useCounter } from "../hooks";
 
 export const Buttons = () => {
-  const { counter, buttons } = useButtons();
+  const { counter, isDisableIncrement, buttons } = useCounter();
 
   return (
     <section className="global-centered global-direction-column">
@@ -12,6 +12,7 @@ export const Buttons = () => {
         <button
           className="global-primary-button"
           onClick={buttons.handleClickDecrement}
+          disabled={isDisableIncrement}
         >
           Decrement
         </button>

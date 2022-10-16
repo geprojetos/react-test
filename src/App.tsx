@@ -1,5 +1,5 @@
 import "./styles.css";
-import { Buttons } from "./components/buttons/";
+import { Buttons } from "./components/counter";
 import { Form } from "./components/form";
 import { GitHub } from "./components/gitHub/";
 
