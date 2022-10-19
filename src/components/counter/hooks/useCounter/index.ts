@@ -10,22 +10,34 @@ const useCounter = () => {
 
   const buttons = {
     handleClickIncrement: () => {
-      setCounter((oldState) => oldState + 1);
+      state.setCounter(buttons.utils.increment);
     },
     handleClickDecrement: () => {
-      setCounter((oldState) => buttons.utils.isValidOldState(oldState));
+      state.setCounter(buttons.utils.isDecrement);
     },
     utils: {
-      isValidOldState: (oldState: number) => {
+      increment: (oldState: number) => {
+        return oldState + 1;
+      },
+      isDecrement: (oldState: number) => {
         return oldState > 0 ? oldState - 1 : 0;
       },
       isDisableIncrementButton: () => {
         if (counter === 0) {
-          setIsDisableIncrement(true);
+          state.setIsDisableIncrement(true);
           return;
         }
-        setIsDisableIncrement(false);
+        state.setIsDisableIncrement(false);
       },
+    },
+  };
+
+  const state = {
+    setCounter: (fn: React.SetStateAction<number>) => {
+      setCounter(fn);
+    },
+    setIsDisableIncrement: (isDisable: boolean) => {
+      setIsDisableIncrement(isDisable);
     },
   };
 

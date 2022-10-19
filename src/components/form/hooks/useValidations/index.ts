@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { FormProps } from "../useForm";
 
 interface useValidationsProps {
@@ -28,31 +28,49 @@ const useValidations = ({ formValues }: useValidationsProps) => {
     },
     isInvalidName: () => {
       if (!formValues.name) {
-        setFormErrors((oldState) => ({
-          ...oldState,
-          name: "Name is required",
-        }));
+        state.setFormErrors(validations.utils.nameIsRequired);
         return;
       }
-
-      setFormErrors((oldState) => ({
-        ...oldState,
-        name: "",
-      }));
+      state.setFormErrors(validations.utils.nameIsValid);
     },
     isInvalidEmail: () => {
       if (!formValues.email) {
-        setFormErrors((oldState) => ({
-          ...oldState,
-          email: "Email is required",
-        }));
+        state.setFormErrors(validations.utils.emailIsRequired);
         return;
       }
+      state.setFormErrors(validations.utils.emailIsValid);
+    },
+    utils: {
+      nameIsRequired: (oldState: FormProps) => {
+        return {
+          ...oldState,
+          name: "Name is required",
+        };
+      },
+      nameIsValid: (oldState: FormProps) => {
+        return {
+          ...oldState,
+          name: "",
+        };
+      },
+      emailIsRequired: (oldState: FormProps) => {
+        return {
+          ...oldState,
+          email: "Email is required",
+        };
+      },
+      emailIsValid: (oldState: FormProps) => {
+        return {
+          ...oldState,
+          email: "",
+        };
+      },
+    },
+  };
 
-      setFormErrors((oldState) => ({
-        ...oldState,
-        email: "",
-      }));
+  const state = {
+    setFormErrors: (fn: SetStateAction<FormProps>) => {
+      setFormErrors(fn);
     },
   };
 

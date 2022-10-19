@@ -31,10 +31,34 @@ const useForm = () => {
 
   const inputs = {
     handleChangeName: (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues((oldState) => ({ ...oldState, name: event.target.value }));
+      state.setFormValues((oldState) =>
+        inputs.utils.updateName(oldState, event)
+      );
     },
     handleChangeEmail: (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues((oldState) => ({ ...oldState, email: event.target.value }));
+      state.setFormValues((oldState) =>
+        inputs.utils.updateEmail(oldState, event)
+      );
+    },
+    utils: {
+      updateName: (
+        oldState: FormProps,
+        event: ChangeEvent<HTMLInputElement>
+      ) => {
+        return { ...oldState, name: event.target.value };
+      },
+      updateEmail: (
+        oldState: FormProps,
+        event: ChangeEvent<HTMLInputElement>
+      ) => {
+        return { ...oldState, email: event.target.value };
+      },
+    },
+  };
+
+  const state = {
+    setFormValues: (fn: React.SetStateAction<FormProps>) => {
+      setFormValues(fn);
     },
   };
 

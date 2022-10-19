@@ -7,29 +7,48 @@ interface FormGitHubProps {
 const useGitHub = (apiGitHub: any) => {
   const [userInfo, setUserInfo] = useState<any>({});
   const [formValues, setFormValues] = useState<FormGitHubProps>({
-    userName: ""
+    userName: "",
   });
 
   const api = {
     getUsers: (userName: string) => {
-      apiGitHub(setUserInfo, userName);
-    }
+      apiGitHub(state.setUserInfo, userName);
+    },
   };
 
   const form = {
     handleSubmit: (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       api.getUsers(formValues.userName);
-    }
+    },
   };
 
   const inputs = {
     handleChangeUserName: (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues((oldState) => ({
-        ...oldState,
-        userName: event.target.value
-      }));
-    }
+      state.setFormValues((oldState) =>
+        inputs.utils.updateName(oldState, event)
+      );
+    },
+    utils: {
+      updateName: (
+        oldState: FormGitHubProps,
+        event: ChangeEvent<HTMLInputElement>
+      ) => {
+        return {
+          ...oldState,
+          userName: event.target.value,
+        };
+      },
+    },
+  };
+
+  const state = {
+    setUserInfo: (fn: React.Dispatch<any>) => {
+      setUserInfo(fn);
+    },
+    setFormValues: (fn: React.SetStateAction<FormGitHubProps>) => {
+      setFormValues(fn);
+    },
   };
 
   return {
@@ -37,7 +56,7 @@ const useGitHub = (apiGitHub: any) => {
     userInfo,
     form,
     inputs,
-    formValues
+    formValues,
   };
 };
 
