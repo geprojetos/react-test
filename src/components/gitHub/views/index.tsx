@@ -1,9 +1,9 @@
 import { useGitHub } from "../hooks/";
-import { apiGitHub } from "../api";
+import { gitHubApi } from "../api";
 import "./styles.css";
 
 export const GitHub = () => {
-  const { userInfo, form, inputs, formValues } = useGitHub(apiGitHub);
+  const { userInfo, form, inputs, formValues } = useGitHub(gitHubApi);
 
   return (
     <section className="global-centered global-direction-column">

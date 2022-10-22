@@ -11,15 +11,24 @@ const useGitHub = (apiGitHub: any) => {
   });
 
   const api = {
-    getUsers: (userName: string) => {
-      apiGitHub(state.setUserInfo, userName);
+    getUsers: async (userName: string) => {
+      try {
+        const response = await apiGitHub(userName);
+        if (response?.userInfo?.id) {
+          state.setUserInfo(response?.userInfo);
+          return;
+        }
+        state.setUserInfo(() => {});
+      } catch (error) {
+        console.error(error);
+      }
     },
   };
 
   const form = {
-    handleSubmit: (event: FormEvent<HTMLFormElement>) => {
+    handleSubmit: async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      api.getUsers(formValues.userName);
+      await api.getUsers(formValues.userName);
     },
   };
 

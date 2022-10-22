@@ -16,8 +16,8 @@ const mockSubmit: any = {
   preventDefault: () => null,
 };
 
-const mockApiGitHub = (saveValue: any) => {
-  saveValue({ login: "fake user name" });
+const mockGitHubApi = (userName: string) => {
+  return { userInfo: { id: "123", login: "fake user name" } };
 };
 
 const mockSubmitDefaultUserName: any = {
@@ -51,7 +51,7 @@ export {
   mockEventName,
   mockEventEmail,
   mockSubmit,
-  mockApiGitHub,
+  mockGitHubApi,
   mockSubmitDefaultUserName,
   mockSubmitUserName,
   mockValidationsIsValid,
