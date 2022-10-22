@@ -1,0 +1,4 @@
+{
+  "turboConsoleLog.delimiterInsideMessage": "=>",
+  "turboConsoleLog.includeFileNameAndLineNum": false
+}

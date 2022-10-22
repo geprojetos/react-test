@@ -1,0 +1,34 @@
+{
+  "Describe test": {
+    "prefix": "dt",
+    "body": [
+      "import \"@testing-library/react-hooks/lib/native/pure\";",
+      "import { renderHook, act } from \"@testing-library/react-hooks\";",
+      "import { useCounter } from \".\";",
+      "",
+      "describe(\"$1\", () => {",
+      "  test(\"should be able $2\", () => {",
+      "    const { result } = renderHook(() => $1());",
+      "    act(() => {",
+      "      result.current;",
+      "    });",
+      "    expect(result.current).toBeTruthy();",
+      "  });",
+      "});"
+    ],
+    "description": "Describe unit test"
+  },
+  "Unit test": {
+    "prefix": "ut",
+    "body": [
+      "  test(\"should be able $1\", () => {",
+      "    const { result } = renderHook(() => $2());",
+      "    act(() => {",
+      "      result.current;",
+      "    });",
+      "    expect(result.current).toBeTruthy();",
+      "  });"
+    ],
+    "description": "Unit test"
+  }
+}
